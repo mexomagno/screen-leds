@@ -1,9 +1,7 @@
-from PIL import ImageGrab, Image
 import time
 import os
 import pygame
 import numpy as np
-import cv2
 from mss import mss
 
 
@@ -26,24 +24,24 @@ def getMean_numpy(image):
     mean = np.mean(skipped_arr, axis=(0, 1)) / 255.0
     return mean
 
-def getMean_naive(image):
-    red = 0
-    green = 0
-    blue = 0
-    for y in range(0, image.size[1], SKIP):  #loop over the height
-        for x in range(0, image.size[0], SKIP):  #loop over the width
-            color = image.getpixel((x, y))  #grab a pixel
-            red = red + color[0]
-            green = green + color[1]
-            blue = blue + color[2]
-    red = (( red / ( (image.size[1]/SKIP) * (image.size[0]/SKIP) ) ) )/255.0
-    green = ((green / ( (image.size[1]/SKIP) * (image.size[0]/SKIP) ) ) )/255.0
-    blue = ((blue / ( (image.size[1]/SKIP) * (image.size[0]/SKIP) ) ) )/255.0
-    return (red, green, blue)
+# def getMean_naive(image):
+#     red = 0
+#     green = 0
+#     blue = 0
+#     for y in range(0, image.size[1], SKIP):  #loop over the height
+#         for x in range(0, image.size[0], SKIP):  #loop over the width
+#             color = image.getpixel((x, y))  #grab a pixel
+#             red = red + color[0]
+#             green = green + color[1]
+#             blue = blue + color[2]
+#     red = (( red / ( (image.size[1]/SKIP) * (image.size[0]/SKIP) ) ) )/255.0
+#     green = ((green / ( (image.size[1]/SKIP) * (image.size[0]/SKIP) ) ) )/255.0
+#     blue = ((blue / ( (image.size[1]/SKIP) * (image.size[0]/SKIP) ) ) )/255.0
+#     return (red, green, blue)
 
-def getMean_cython(image):
-    image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-    return (0, 0, 0)
+# def getMean_cython(image):
+#     image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+#     return (0, 0, 0)
 
 def loop():
     viewer = Screen()
