@@ -6,7 +6,7 @@ from mss import mss
 
 
 MAX_FPS = 30
-SKIP = 30 # Skip pixels
+SKIP = 20 # Skip pixels
 
 class Screen:
     def __init__(self):
